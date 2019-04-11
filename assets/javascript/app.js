@@ -23,8 +23,6 @@ $(document).ready(function () {
     var dest = $("#destination").val();
     var firstTrain = $("#firstTrainTime").val();
     var freq = $("#frequency").val();
-    var firstTrainFormat = "HH:mm";
-    var convertedFirstTrain = moment(firstTrain, firstTrainFormat);
 
     //Creates local "temporary" object for holding train data
     var newTrain = {
@@ -69,19 +67,39 @@ $(document).ready(function () {
     console.log(trainFirst);
     console.log(trainFreq);
 
+    // First Time (pushed back 1 year to make sure it comes before current time)   
+    var firstTimeConverted = moment(trainFirst, "HH:mm").subtract(1, "years");
+    console.log(firstTimeConverted);
 
-    //Work on time format
+    // Current Time
+    var currentTime = moment();
+    console.log("CURRENT TIME: " + moment(currentTime).format("hh:mm"));
 
-    //Calculate next arrival
-    //Calculate minutes away
+    //Difference between the times
+    var diffTime = moment().diff(moment(firstTimeConverted), "minutes");
+    console.log("DIFFERENCE IN TIME: " + diffTime);
+
+    //Time apart (remainder)
+    var tRemainder = diffTime % trainFreq;
+    console.log(tRemainder);
+
+    // Minute Until Train
+    var tMinutesTillTrain = trainFreq - tRemainder;
+    console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
+
+    // Next Train
+    var nextTrain = moment().add(tMinutesTillTrain, "minutes");
+    console.log("ARRIVAL TIME: " + moment(nextTrain).format("hh:mm"));
+
+
 
     //Create the new row
     var newRow = $("<tr>").append(
       $("<td>").text(trainName),
       $("<td>").text(trainDest),
       $("<td>").text(trainFreq),
-      $("<td>").text("Not Yet"),
-      $("<td>").text("Not Yet"),
+      $("<td>").text(nextTrain),
+      $("<td>").text(tMinutesTillTrain),
     );
 
     //Append the new row to the table
