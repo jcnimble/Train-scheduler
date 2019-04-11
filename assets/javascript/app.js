@@ -98,7 +98,7 @@ $(document).ready(function () {
       $("<td>").text(trainName),
       $("<td>").text(trainDest),
       $("<td>").text(trainFreq),
-      $("<td>").text(nextTrain),
+      $("<td>").text(moment(nextTrain).format("hh:mm a")),
       $("<td>").text(tMinutesTillTrain),
     );
 
@@ -108,6 +108,13 @@ $(document).ready(function () {
     // Handle the errors
   }, function (errorObject) {
     console.log("Errors handled: " + errorObject.code);
+  });
+
+  $(window).keydown(function(event){
+    if(event.keyCode == 13) {
+      event.preventDefault();
+      return false;
+    }
   });
 
 });

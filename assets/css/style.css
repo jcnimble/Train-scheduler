@@ -1,0 +1,33 @@
+body{
+    background-color: wheat;
+}
+
+.jumbotron{
+    text-align: center;
+    background-image:url('../images/train.png');
+    background-size: cover;
+    color: maroon;
+}
+
+#display-text{
+    background-color: wheat;
+    border-radius: 5px;
+    opacity: 0.8;
+}
+
+
+.card{
+    margin-top:10px;
+    margin-bottom: 10px;
+    border: solid 2px maroon;
+}
+
+.card-header{
+    background-color:maroon;
+    color: white
+}
+
+#submit-train-btn{
+    background-color: maroon;
+    border: solid 1px maroon;
+}
